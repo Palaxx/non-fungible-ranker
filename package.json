@@ -4,7 +4,12 @@
   "description": "Module for calculating the statistics of an nft collection",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix",
+    "lint:staged": "lint-staged",
+    "lint:commit": "commitlint --edit ",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -18,5 +23,24 @@
   "bugs": {
     "url": "https://github.com/Palaxx/nft-collection-stats/issues"
   },
-  "homepage": "https://github.com/Palaxx/nft-collection-stats#readme"
+  "homepage": "https://github.com/Palaxx/nft-collection-stats#readme",
+  "lint-staged": {
+    "*/**/*.{js,jsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
+  "devDependencies": {
+    "husky": "^8.0.1",
+    "eslint": "^8.25.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.0.1",
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
+    "lint-staged": "12.3.4"
+  }
 }
