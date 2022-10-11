@@ -7,9 +7,11 @@ const fakeReader = (options) => ({
 })
 
 t.test('It should be able to create a filesystemReader', async (t) => {
-  const readerFactory = factory()
+  const factory = t.mock('../../src/readers', {
+    '../../src/readers/filesystemReader': () => () => ({}),
+  })
 
-  const reader = readerFactory.make('filesystem')
+  const reader = factory().make('filesystem')
   t.ok(reader)
 })
 
