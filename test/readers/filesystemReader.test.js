@@ -1,5 +1,7 @@
 'use strict'
 
+const { Readable } = require('stream')
+
 const t = require('tap')
 
 const filesystemReaderFactory = require('../../src/readers/filesystemReader')
@@ -52,17 +54,24 @@ t.test('It should throw error if path folder does not exists', async (t) => {
   })
 })
 
-t.test('It should read all the files of the path folder', async (t) => {
+t.test('It should read all the files of the path folder', (t) => {
+  t.plan(2)
   const reader = filesystemReaderFactory({
     path: fakeDir,
   })
 
-  const results = await reader.execute()
+  reader.execute().then((results) => {
+    t.type(results, Readable)
 
-  t.type(results, Map)
-
-  t.strictSame(Object.fromEntries(results), {
-    '1.json': fakeContent1.attributes,
-    '2.json': fakeContent2.attributes,
+    const records = {}
+    results.on('data', ({ id, content }) => {
+      records[id] = content
+    })
+    results.on('end', () => {
+      t.strictSame(records, {
+        '1.json': fakeContent1.attributes,
+        '2.json': fakeContent2.attributes,
+      })
+    })
   })
 })
