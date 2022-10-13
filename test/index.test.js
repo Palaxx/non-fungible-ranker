@@ -22,5 +22,5 @@ t.test('It should add attribute as eligible in stats module', async (t) => {
     reader: 'xxx',
     attributes: ['field1', 'field2'],
   })
-  t.equals(2, stats.attributes().length)
+  t.equals(2, Array.from(stats.getCollection().attributesMap().keys()).length)
 })

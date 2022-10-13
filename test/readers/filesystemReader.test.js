@@ -44,9 +44,23 @@ t.test('It should throw error if path options not exists', async (t) => {
   })
 })
 
+t.test(
+  'It should throw error if attributes options has no values',
+  async (t) => {
+    const reader = filesystemReaderFactory({
+      path: fakeDir,
+    })
+
+    t.throws(() => reader.validateOptions(), {
+      message: 'At least one attribute should be received',
+    })
+  }
+)
+
 t.test('It should throw error if path folder does not exists', async (t) => {
   const reader = filesystemReaderFactory({
     path: 'fake_dir',
+    attributes: ['Background', 'Skin'],
   })
 
   t.rejects(() => reader.createReadStream(), {
@@ -58,6 +72,7 @@ t.test('It should read all the files of the path folder', (t) => {
   t.plan(2)
   const reader = filesystemReaderFactory({
     path: fakeDir,
+    attributes: ['Background', 'Skin'],
   })
 
   reader.createReadStream().then((results) => {
