@@ -1,14 +1,14 @@
 const t = require('tap')
 
-const factory = require('../../src/readers')
+const factory = require('../../lib/readers')
 
 const fakeReader = (options) => ({
-  execute: () => options.result,
+  createReadStream: () => options.result,
 })
 
 t.test('It should be able to create a filesystemReader', async (t) => {
-  const factory = t.mock('../../src/readers', {
-    '../../src/readers/filesystemReader': () => () => ({}),
+  const factory = t.mock('../../lib/readers', {
+    '../../lib/readers/filesystemReader': () => () => ({}),
   })
 
   const reader = factory().make('filesystem')
@@ -16,13 +16,13 @@ t.test('It should be able to create a filesystemReader', async (t) => {
 })
 
 t.test(
-  'It should be possible to add new reader and execute without validation',
+  'It should be possible to add new reader and createReadStream without validation',
   async (t) => {
     const readerFactory = factory()
     readerFactory.register('fakeReader', fakeReader)
     const reader = readerFactory.make('fakeReader', { result: true })
     t.ok(reader)
-    t.ok(reader.execute())
+    t.ok(reader.createReadStream())
   }
 )
 
@@ -36,12 +36,12 @@ t.test(
           throw new Error(`wrongParameter is not a valid parameter`)
         }
       },
-      execute: () => options.result,
+      createReadStream: () => options.result,
     })
     readerFactory.register('fakeReader', fakeReaderWithValidation)
 
     const reader = readerFactory.make('fakeReader', { result: true })
-    t.ok(reader.execute())
+    t.ok(reader.createReadStream())
 
     t.throws(() => readerFactory.make('fakeReader', { wrongParameter: true }), {
       message: `wrongParameter is not a valid parameter`,

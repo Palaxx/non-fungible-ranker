@@ -4,7 +4,7 @@ const { Readable } = require('stream')
 
 const t = require('tap')
 
-const filesystemReaderFactory = require('../../src/readers/filesystemReader')
+const filesystemReaderFactory = require('../../lib/readers/filesystemReader')
 
 const fakeContent1 = {
   attributes: [
@@ -49,7 +49,7 @@ t.test('It should throw error if path folder does not exists', async (t) => {
     path: 'fake_dir',
   })
 
-  t.rejects(() => reader.execute(), {
+  t.rejects(() => reader.createReadStream(), {
     message: 'fake_dir is not a valid folder',
   })
 })
@@ -60,7 +60,7 @@ t.test('It should read all the files of the path folder', (t) => {
     path: fakeDir,
   })
 
-  reader.execute().then((results) => {
+  reader.createReadStream().then((results) => {
     t.type(results, Readable)
 
     const records = {}

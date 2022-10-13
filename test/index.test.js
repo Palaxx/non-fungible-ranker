@@ -1,6 +1,6 @@
 const t = require('tap')
 
-const nftCollectionStats = require('../index')
+const nftCollectionStats = require('../lib/index')
 
 t.test(
   'It should throw an error in case no reader option is received',
