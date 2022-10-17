@@ -87,6 +87,9 @@ With this field you can choose and customize the rank algorithm
 
 ```javascript
 const ranker = { 
-    type: 'rarityRanker',
+    type: 'rarityScore',
 }
 ```
+Available rankers:
+- traitRarity: The simpler algorithm, each nft will be scored based on his rarest trait 
+- rarityScore: The commonly used algorithm, each nft will be scored based on the rarity of all his traits on the entire collection
