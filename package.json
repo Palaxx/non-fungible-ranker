@@ -1,6 +1,6 @@
 {
   "name": "non-fungible-ranker",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Module for calculating the statistics of an nft collection",
   "main": "lib/index.js",
   "scripts": {
