@@ -2,7 +2,7 @@
 
 const t = require('tap')
 
-const rarityScoreRanker = require('../../lib/rankers/averageRanker')
+const averageTraitRanker = require('../../lib/rankers/averageRanker')
 
 const fakeCollection = {
   getNft: (id) => {
@@ -33,7 +33,7 @@ const fakeCollection = {
 }
 
 t.test('It should return right score when getNftScore is called', async () => {
-  const ranker = rarityScoreRanker(fakeCollection)
+  const ranker = averageTraitRanker(fakeCollection)
 
   t.equals(ranker.getNftScore(1).toFixed(2), (0.15).toFixed(2))
   t.equals(ranker.getNftScore(2).toFixed(2), (0.4).toFixed(2))
