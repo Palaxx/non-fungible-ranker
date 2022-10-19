@@ -102,3 +102,29 @@ t.test('It should rank a collection', async (t) => {
     ]
   )
 })
+
+t.test('Should be possible to register and use new ranker', async (t) => {
+  const ranker = nonFungibleRanker({
+    source: { type: 'filesystem', path: fakeDir },
+    collection: { attributes: ['Background', 'Skin'], supply: 3 },
+    ranker: { type: 'customRanker' },
+  })
+
+  ranker.registerRanker('customRanker', (collection) => ({
+    getNftScore: (nftId) => parseInt(nftId.replace('.json', '')),
+  }))
+
+  const result = await ranker.rankCollection()
+
+  t.strictSame(
+    result.map((el) => ({
+      id: el.id,
+      score: parseFloat(el.score.toFixed(2)),
+    })),
+    [
+      { id: '1.json', score: 1 },
+      { id: '2.json', score: 2 },
+      { id: '3.json', score: 3 },
+    ]
+  )
+})
