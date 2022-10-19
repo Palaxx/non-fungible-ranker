@@ -40,3 +40,19 @@ t.test('Should be possible to add nft', async (t) => {
   t.strictSame(collection.getNft(1), redNft)
   t.strictSame(collection.getNft(4), yellowNft)
 })
+
+t.test('Should be possible to add attribute and retrieves', async (t) => {
+  const collection = collectionFactory({ supply: 100 })
+  collection.addEligibleAttribute('fakeAttribute')
+  collection.addAttributeElement('fakeAttribute', 'fakeElement1')
+  collection.addAttributeElement('fakeAttribute', 'fakeElement2')
+  collection.addAttributeElement('fakeAttribute', 'fakeElement1')
+  t.equals(
+    collection.getAttributeOccurrences('fakeAttribute', 'fakeElement2'),
+    1
+  )
+  t.equals(
+    collection.getAttributeOccurrences('fakeAttribute', 'fakeElement1'),
+    2
+  )
+})
