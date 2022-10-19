@@ -1,6 +1,6 @@
 {
   "name": "non-fungible-ranker",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Module for calculating the statistics of an nft collection",
   "main": "lib/index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Palaxx/nft-collection-stats.git"
+    "url": "git+https://github.com/Palaxx/non-fungible-ranker.git"
   },
   "keywords": [
     "nft"
@@ -21,9 +21,9 @@
   "author": "Michele Palamidessi <michele.palamidessi@protonmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Palaxx/nft-collection-stats/issues"
+    "url": "https://github.com/Palaxx/non-fungible-ranker/issues"
   },
-  "homepage": "https://github.com/Palaxx/nft-collection-stats#readme",
+  "homepage": "https://github.com/Palaxx/non-fungible-ranker#readme",
   "lint-staged": {
     "*/**/*.{js,jsx}": [
       "prettier --write",
