@@ -28,6 +28,15 @@ t.test('It should be able to create a traitRarityRanker', async (t) => {
   t.ok(reader)
 })
 
+t.test('It should be able to create a averageRanker', async (t) => {
+  const factory = t.mock('../../lib/rankers', {
+    '../../lib/rankers/averageRanker': () => () => ({}),
+  })
+
+  const reader = factory(fakeCollection).make('averageTraitRarity')
+  t.ok(reader)
+})
+
 t.test('It should be possible to add new ranker', async (t) => {
   const fakeCollection = {
     getNftIds: () => [1, 2, 3],

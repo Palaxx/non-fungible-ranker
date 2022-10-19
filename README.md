@@ -92,4 +92,5 @@ const ranker = {
 ```
 Available rankers:
 - traitRarity: The simpler algorithm, each nft will be scored based on his rarest trait 
+- averageTraitRarity: Sum of the average rarity of every nft traits  
 - rarityScore: The commonly used algorithm, each nft will be scored based on the rarity of all his traits on the entire collection
