@@ -1,2 +1,6 @@
 node_modules
 test
+.coverage
+.nyc_output
+.idea
+.github
